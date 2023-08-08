@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", (req, res) => {
-  res.send(["Harry Potter, Space Mono, The Story"]);
+  res.send(books);
 });
 
 app.get("/books/:price", (req, res) => {
@@ -61,6 +61,17 @@ app.put('/books/:id',(req,res) => {
   book.name = req.body.name;
   res.send(book);
 })
+
+app.delete('/books/:id', (req, res) => {
+  const book = books.find(book => book.id === parseInt(req.params.id))
+  if(!book) {
+    res.send("The book was given ID is not found");
+    return
+  }
+  const index = books.indexOf(book);
+  books.splice(index,1);  
+  res.send(book);
+}) 
 
 const validateBook = (object) => {
   const schema = {
