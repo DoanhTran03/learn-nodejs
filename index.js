@@ -46,6 +46,29 @@ app.post("/books", (req, res) => {
   res.send(book);
 });
 
+app.put('/books/:id',(req,res) => {
+  const book = books.find(book => book.id == parseInt(req.params.id));
+  console.log(book);
+  if(!book) {
+    res.send("book id is invalid");
+    return 
+  }
+  const result = validateBook(req.body);
+  if(!result) {
+    res.send(result.error.details[0].message)
+    return;
+  }
+  book.name = req.body.name;
+  res.send(book);
+})
+
+const validateBook = (object) => {
+  const schema = {
+    name: Joi.string().min(3).required(),
+  };
+  const result = Joi.validate(object, schema);
+  return result
+}
 app.listen(PORT, () => {
   console.log(`Listening on port: http://localhost:${PORT}`);
 });
