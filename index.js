@@ -1,11 +1,13 @@
 const Joi = require("joi");
 const express = require("express");
+const morgan = require('morgan');
 const logger = require('./logger');
 const app = express();
 
 app.use(express.json());
 //My first middle ware is here
 app.use(logger)
+app.use(morgan('tiny'));
 
 const PORT = process.env.PORT || 3000;
 
