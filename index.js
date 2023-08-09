@@ -3,11 +3,19 @@ const express = require("express");
 const morgan = require('morgan');
 const logger = require('./logger');
 const app = express();
+const config = require('config')
+
+//Configuration
+console.log(`Name: ${config.name}`);
+console.log(`Password: ${config.password}`);
 
 app.use(express.json());
 //My first middle ware is here
 app.use(logger)
-app.use(morgan('tiny'));
+if (app.get('env') === 'development') {
+  console.log('Morgan installed');    
+  app.use(morgan('tiny'));
+}
 
 const PORT = process.env.PORT || 3000;
 
