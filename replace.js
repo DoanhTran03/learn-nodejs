@@ -9,14 +9,13 @@ const getUser = (id) => {
         }, 2000);
     })
 }
-getUser(10).then(result => console.log(result));
 console.log('After');
 
 function getRepositories(username) {
     return new Promise((resovle, reject) => {
         setTimeout(() => {
           console.log('Calling GitHub API...');
-          callback(['repo1', 'repo2', 'repo3']);
+          resovle(['repo1', 'repo2', 'repo3']);
         }, 2000);
     })
 }
@@ -29,4 +28,9 @@ function getCommits(repo) {
         }, 2000);
     })
 }
-getCommits('DoanhTran03').then(result => console.log(result));
+
+//Consuming promise
+getUser(1)
+.then(user => getRepositories(user.username))
+.then(repos => getCommits(repos[0]))
+.then (commits => console.log(commits))
