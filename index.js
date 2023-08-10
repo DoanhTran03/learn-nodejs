@@ -4,6 +4,6 @@ const getUserData = (user) => {
     setTimeout(()=>{
         console.log(`User data fetched`)
     },2000)
-    console.log("Before...")
+    return console.log("Before...")
 }
-getUserData();
+const user = getUserData({name: 'Robert'})
