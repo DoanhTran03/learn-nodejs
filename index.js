@@ -11,11 +11,16 @@ const courseSchema = new mongoose.Schema({
     isPublished: Boolean
 })
 
-const Course = mongoose.model('Course', courseSchema);
-const course = new Course({
-    name: 'Basic JavaScript',
-    author: 'Robert',
-    tags: ['javascript', 'education'],
-    isPublished: true
-})
-console.log(course)
+const createDocument = async () => {
+    const Course = mongoose.model('Course', courseSchema);
+    const course = new Course({
+        name: 'Basic JavaScript',
+        author: 'Robert',
+        tags: ['javascript', 'education'],
+        isPublished: true
+    })
+    const result = await course.save();
+    console.log(result);
+}
+
+createDocument();
