@@ -25,7 +25,16 @@ const createDocument = async () => {
 
 const getDocument = async () => {
     const courses = await Course
-    .find()
+
+    // Start with Mosh
+    .find({author: /^Mosh/})
+
+    // End with Mosh 
+    .find({author: /Mosh$/})
+
+    // Contains Mosh
+    .find({author: /.*Mosh.*/})
+
     .or([{author: 'Mosh'}, {isPublished: true}])
     .and([{}])
     .limit(10)
