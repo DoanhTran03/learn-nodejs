@@ -25,7 +25,9 @@ const createDocument = async () => {
 
 const getDocument = async () => {
     const courses = await Course
-    .find({author: {$in: ['Mosh']}, price: {$gte: 12, $lt: 25}})
+    .find()
+    .or([{author: 'Mosh'}, {isPublished: true}])
+    .and([{}])
     .limit(10)
     .sort({name: 1})
     .select({name: 1, tags: 1, author: 1})
