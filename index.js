@@ -11,16 +11,26 @@ const courseSchema = new mongoose.Schema({
     isPublished: Boolean
 })
 
+const Course = mongoose.model('Course', courseSchema);
 const createDocument = async () => {
-    const Course = mongoose.model('Course', courseSchema);
     const course = new Course({
-        name: 'Basic JavaScript',
-        author: 'Robert',
-        tags: ['javascript', 'education'],
+        name: 'Basic MongoDB',
+        author: 'Mosh',
+        tags: ['mongodb', 'education'],
         isPublished: true
-    })
+    });
     const result = await course.save();
     console.log(result);
 }
 
-createDocument();
+const getDocument = async () => {
+    const courses = await Course
+    .find({author: {$in: ['Mosh']}, price: {$gte: 12, $lt: 25}})
+    .limit(10)
+    .sort({name: 1})
+    .select({name: 1, tags: 1, author: 1})
+    .lean();
+    console.log(courses);
+}
+
+getDocument()
