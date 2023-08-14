@@ -29,7 +29,7 @@ const getDocument = async () => {
 
     const courses = await Course
     .find({})
-    .skip((pageNumber -1) * pageSize)
+    .skip((pageNumber -1) * pageSize)       
     .limit(10)
     .lean()
     .count();
