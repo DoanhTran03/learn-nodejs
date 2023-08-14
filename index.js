@@ -40,7 +40,8 @@ const getDocument = async () => {
     .limit(10)
     .sort({name: 1})
     .select({name: 1, tags: 1, author: 1})
-    .lean();
+    .lean()
+    .count();
     console.log(courses);
 }
 
