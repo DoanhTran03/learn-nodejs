@@ -49,4 +49,8 @@ const updateDocument = async (id) => {
     console.log(result);
 }
 
-updateDocument("64d70d2ac40d8a35908fafcb");
+const removeDocument = async (id) => {
+    const course = await Course.findByIdAndRemove(id);
+    console.log (course);
+}
+removeDocument('64d70d0aec64461d10ef22eb');
