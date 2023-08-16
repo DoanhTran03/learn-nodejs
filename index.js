@@ -6,12 +6,14 @@ mongoose.connect('mongodb://localhost/playground')
 const courseSchema = new mongoose.Schema({
     name: String,
     author: String,
+    isPublished: Boolean,
+    price: Number,
     tags: [String],
     date: {type: Date, default: Date.now},
-    isPublished: Boolean
 })
 
 const Course = mongoose.model('Course', courseSchema);
+
 const createDocument = async () => {
     const course = new Course({
         name: 'Basic MongoDB',
@@ -36,4 +38,15 @@ const getDocument = async () => {
     console.log(courses);
 }
 
-getDocument()
+const updateDocument = async (id) => {
+    const course = await Course.findById(id);
+
+    if (!course) return;
+
+    course.author = 'Robert';
+    course.name = 'Advanced Nodejs';
+    const result = await course.save();
+    console.log(result);
+}
+
+updateDocument("64d70d2ac40d8a35908fafcb");
