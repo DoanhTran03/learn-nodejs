@@ -8,20 +8,25 @@ mongoose
 const courseSchema = mongoose.Schema({
   tags: {
     type: String,
-    required: true
+    required: true,
   },
   name: {
-      type: String,
-      minlength: 3,
-      maxlength: 10,
-      required: true,
-    },
-    price: {
-        type: Number,
-        min: 0,
-        max: 100
-    },
-    date: { type: Date, default: Date.now() },
+    type: String,
+    maxlength: 10,
+    required: true,
+    validate: {
+      validator: function(v) {
+        return v && v.length > 3;
+      },
+      message: "A course name should have at least 3 characters"
+    }
+  },
+  price: {
+    type: Number,
+    min: 0,
+    max: 100,
+  },
+  date: { type: Date, default: Date.now() },
   author: String,
   isPublish: Boolean,
 });
@@ -31,7 +36,7 @@ const Course = mongoose.model("course", courseSchema);
 const createDocument = async () => {
   const course = Course({
     tags: ["test"],
-    name: "Test",
+    name: "Te",
     author: "Cowboy",
     isPublish: true,
     price: 10,
