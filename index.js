@@ -39,13 +39,15 @@ const createDocument = async () => {
     name: "Te",
     author: "Cowboy",
     isPublish: true,
-    price: 10,
+    price: 200,
   });
   try {
     const result = await course.save();
     console.log(result);
-  } catch (err) {
-    console.log(err);
+  } catch (ex) {
+    for( field in ex.errors) {
+      console.log(ex.errors[field].message)
+    }
   }
 };
 createDocument();
