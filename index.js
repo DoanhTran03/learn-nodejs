@@ -5,7 +5,7 @@ mongoose
   .then(() => console.log("Connect successfully to database"))
   .catch((err) => console.log("Can not connect to database due to " + err));
 
-const courseSchema = mongoose.Schema({
+const courseSchema = new mongoose.Schema({
   tags: {
     type: String,
     required: true,
