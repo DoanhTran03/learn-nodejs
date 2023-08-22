@@ -4,13 +4,13 @@ mongoose.connect('mongodb://localhost/playground')
 .then(() => {console.log('Connected to database')})
 .catch((err) => console.log(err));
 
-const Author = mongoose.model('author', new mongoose.Schema({
+const Author = mongoose.model('Author', new mongoose.Schema({
     name: String,
     bio: String,
     website: String
 }))
 
-const Course = mongoose.model('course', new mongoose.Schema({
+const Course = mongoose.model('Course', new mongoose.Schema({
     name: String,
     author: {
         type: mongoose.Schema.Types.ObjectId,
@@ -38,7 +38,9 @@ const createCourse = async (name, authorId) => {
 }
 
 const getCoures = async () => {
-    const result = await Course.find({}).lean();
+    const result = await Course.find({})
+    .populate('author',{name: 1, _id: 1})
+    .lean();
     console.log(result);
 }
 
