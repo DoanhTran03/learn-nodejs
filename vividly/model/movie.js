@@ -28,10 +28,14 @@ const Movie = mongoose.model('Movie', MovieSchema);
 const validateMovie = (movie) => {
     const shema = {
         title: Joi.string().required().min(3).max(15),
-        genre: Joi.required(),
-        numberInStock: Joi.number().min(10).max(10),
+        genreId: Joi.string().required(),
+        numberInStock: Joi.number().min(10).max(100),
         dailyRentalRate: Joi.number()
     }
     const result = Joi.validate(movie,shema);
     return result;
 }
+
+module.exports.Movie = Movie;
+module.exports.MovieSchema = MovieSchema;
+module.exports.validateMovie = validateMovie;

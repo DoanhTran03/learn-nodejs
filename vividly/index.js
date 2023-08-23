@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const genre = require('./routes/genre')
+const genre = require('./routes/genre');
+const movie = require('./routes/movie');
 
 const app = express();
 app.use(express.json());
-app.use('/api/genres',genre)
+app.use('/api/genres', genre);
+app.use('/api/movies', movie);
 
 const PORT = process.env.PORT || 3000;
 
