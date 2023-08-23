@@ -40,6 +40,7 @@ const createCourse = async (name, authorId) => {
 const getCoures = async () => {
     const result = await Course.find({})
     .populate('author',{name: 1, _id: 1})
+    .populate('category', {name: 1})
     .lean();
     console.log(result);
 }
