@@ -5,7 +5,7 @@ const {Genre} = require ('../model/genre');
 
 router.post('/', async (req,res) => {
     const {error} = validateMovie(req.body);
-    if (error) return res.status(404).send(error);
+    if (error) return res.status(404).send(error.details[0].message);
     const genre = await Genre.findById(req.body.genreId).lean();
 
     const movie = new Movie({
