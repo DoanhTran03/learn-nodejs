@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use('/api/genres', genre);
 app.use('/api/movies', movie);
-app.use('/api/users', user);
+app.use('/api/users', user);  
 
 const PORT = process.env.PORT || 3000;
 

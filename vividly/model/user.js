@@ -17,8 +17,6 @@ const UserSchema = new mongoose.Schema ({
     },
     password: {
         type: String, 
-        unique: true,
-        required: true,
         minlength: 5,
         maxlength: 20
     }
@@ -35,3 +33,7 @@ const validateUser = (user) => {
     const result = Joi.validate(user, schema);
     return result;
 }
+
+module.exports.User = User;
+module.exports.UserSchema = UserSchema;
+module.exports.validateUser = validateUser;
