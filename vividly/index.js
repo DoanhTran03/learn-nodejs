@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
+const config = require('config');
 const genre = require('./routes/genre');
 const movie = require('./routes/movie');
 const user = require('./routes/user');
@@ -15,6 +16,11 @@ app.use('/api/users', user);
 app.use('/api/auth', auth);
 
 const PORT = process.env.PORT || 3000;
+
+if(!config.get('jwtPrivateKey')) {
+    console.log('Private Key is missing');
+    process.exit(1);
+}
 
 mongoose
   .connect("mongodb://localhost/vividly")
