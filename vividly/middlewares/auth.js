@@ -8,9 +8,12 @@ function auth (req,res,next) {
     try {
         const encoded = jwt.verify(token, config.get('jwtPrivateKey'));
         req.user = encoded;
+        console.log(req.user);
         next();
     }
     catch (ex) {
         res.status(404).send('Invalid Token');
     }
 }
+
+module.exports = auth;

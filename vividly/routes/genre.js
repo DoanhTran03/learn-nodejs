@@ -1,6 +1,8 @@
 const express = require('express');
 const {Genre, validateGenre} = require('../model/genre')
 const router = express.Router();
+const admin = require('../middlewares/admin');
+const auth = require('../middlewares/auth')
 
 router.post('/', async (req, res) => {
     const {error} = validateGenre(req.body);
@@ -20,7 +22,7 @@ router.put('/:id', async (req, res) => {
     res.send(result);
 })
 
-router.delete('/:id', async (req,res) => {
+router.delete('/:id', [auth, admin], async (req,res) => {
     const result = await Genre.findByIdAndRemove(req.params.id);
     res.send(result);
 })
