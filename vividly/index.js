@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const winston = require('winston');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const config = require('config');
@@ -7,7 +8,7 @@ const genre = require('./routes/genre');
 const movie = require('./routes/movie');
 const user = require('./routes/user');
 const auth = require('./routes/auth');
-const error = require('./middlewares/error')
+const error = require('./middlewares/error');
 
 const app = express();
 app.use(express.json());
@@ -16,6 +17,8 @@ app.use('/api/movies', movie);
 app.use('/api/users', user);  
 app.use('/api/auth', auth);
 app.use(error);
+
+winston.add(winston.transports.File, {filename: 'logger.txt'});
 
 const PORT = process.env.PORT || 3000;
 

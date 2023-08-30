@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req,res,next) => {
     try {
+        throw Error("Test error");
         const genres = await Genre.find({}).lean();
         res.send(genres);
     }
